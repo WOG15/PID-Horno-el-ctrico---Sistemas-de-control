@@ -185,36 +185,13 @@ plt.grid(True, which='both')
 plt.tight_layout()
 plt.show()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#La linealización la tiene que hacer el programa
-#empecemos por definir unos parametros razonobles dentro de la física
-#Después hacer un pid, manual.
-#Tenemos que tener un dashboard, para cambiar los parametros, y que el pid funcione a partir de esos parametro (aunque no siempre funcionará)
-#las gráficas deben ser en tiempo real, estaría bien que tuviera un botóon para añadir una perturbación (por ejemplo que cambie la temperatura ambiente, o que cambie el coeficiente de convección, para que se escape más la temperatura,o una compuerta que se abra)
-#intentar usar pygame
-
-#146
-#Métricas de respuesta al escalón
-"""
-sobrepico = (np.max(y_esc) - y_esc[-1]) / y_esc[-1] * 100 if np.max(y_esc) > y_esc[-1] else 0
-ts_index = np.where(np.abs(y_esc - y_esc[-1]) > 0.02 * y_esc[-1])[0]
-ts = t_esc[ts_index[-1]] if len(ts_index) > 0 else t_esc[-1]
-print(f"\n4. MÉTRICAS DE RESPUESTA AL ESCALÓN:")
-print(f"   Sobrepico: {sobrepico:.2f}%")
-print(f"   Tiempo de establecimiento (2%): {ts:.2f} s")
-print(f"   Error en estado estacionario: {1 - y_esc[-1]:.6f}")
-"""
+# Diagrama de Nyquist 
+plt.subplot(2, 2, 4) 
+ct.nyquist_plot(sys_tf, color='b', linewidth=2) 
+plt.title('Diagrama de Nyquist') 
+plt.grid(True) 
+# Marcar punto crítico (-1, 0j) en Nyquist 
+plt.plot(-1, 0, 'ro', markersize=8, label='Punto crítico (-1, 0j)') 
+plt.legend() 
+plt.tight_layout() 
+plt.show()
